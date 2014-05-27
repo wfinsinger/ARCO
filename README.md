@@ -58,7 +58,7 @@ Column 19: "peaks Final", the boolean series representing identified peaks
  
 References: 
 -
-Finsinger, W., R. Kelly, J. Fevre, and E.K. Magyari. 2014. A guide to screening charcoal peaks in macrocharcoal-area records for fire episode reconstructions. The Holocene XX: XXXX. doi: 10.1177/0959683614534737 
+Finsinger, W., R. Kelly, J. Fevre, and E.K. Magyari. 2014. A guide to screening charcoal peaks in macrocharcoal-area records for fire episode reconstructions. The Holocene XX: XXXX. doi: 10.1177/0959683614534737 (www.dx.doi.org/10.1177/0959683614534737)
  
 Higuera, P.E., L.B. Brubaker, P.M. Anderson, F.S. Hu, and T.A. Brown. 2009. Vegetation mediated the impacts of postglacial climate change on fire regimes in the south-central Brooks Range, Alaska. Ecological Monographs 79:201–219. 
  
