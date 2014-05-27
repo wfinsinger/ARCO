@@ -2,8 +2,7 @@ ARCO
 ====
 
 Screening charcoal peaks in macrocharcoal-area records for fire-episode reconstructions
-
-----------------------------------------------------------------------------------------
+---
 Screens charcoal peaks for charcoal-area records used to reconstruct past fire episodes with the CharAnalysis softwar, as described in Finsinger et al. (2014). 
  
 For additional details, please refer to Finsinger et al. (2014), or contact: 
