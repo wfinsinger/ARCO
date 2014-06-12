@@ -50,12 +50,9 @@
 #     is freely available (http://sites.google.com/site/charanalysis/).                  #
 #                                                                                        #
 #     3. FireA.file   = CharAnalysis output table from analysis of CHARCOAL AREAS        #
-#     4. FireCsp.file = CharAnalysis output table from analysis of CHARCOAL COUNTS and   #
+#     4. FireC.file = CharAnalysis output table from analysis of CHARCOAL COUNTS and   #
 #                       WITH minimum count test, i.e. with CharAnalysis parameter        #
 #                       'minCountP' < 1.0 (e.g. 0.05 as in Higuera et al. [2009])        #
-#     4. FireC.file   = CharAnalysis output table from analysis of CHARCOAL COUNTS and   #
-#                       WITHOUT minimum count test, i.e. with CharAnalysis parameter     #
-#                       'minCountP' = 1.0                                                #
 #                                                                                        #
 # *** Note: CharAnalysis files must have columns in the expected order, specifically:    #
 #                                                                                        #
@@ -78,7 +75,7 @@
 #                                                                                        #
 #----------------------------------------------------------------------------------------#
   
-arco = function(Seedle.file, Smpl.file, FireA.file, FireCsp.file, FireC.file, 
+arco = function(Seedle.file, Smpl.file, FireA.file, FireC.file, 
                 n.boot=10000, thresh.prob=0.95, win.width=1000, breakage=FALSE,
                 output.dir=file.path(".","arco_output"))
 {
@@ -105,11 +102,8 @@ arco = function(Seedle.file, Smpl.file, FireA.file, FireCsp.file, FireC.file,
     CA.dat <- read.csv(FireA.file, header=T, sep = ",") 
 
   # CharAnalysis output, with Charcoal counts WITH pMinCount
-    CC.dat <- read.csv(FireCsp.file, header=T, sep = ",") 
+    CC.dat <- read.csv(FireC.file, header=T, sep = ",") 
   
-  # CharAnalysis output, with Charcoal counts WITHOUT pMinCount
-    CCno.dat <- read.csv(FireC.file, header=T, sep = ",") 
-
 # ----- Define minimum-area bootstrapping function 
   b.stat <- function(seedle.areas, sample.size, n.boot, thresh.prob) { 
       rj.resample = matrix(sample(seedle.areas, sample.size*n.boot, replace=T), nrow=n.boot)
@@ -310,7 +304,7 @@ if(breakage) {
   abline(h=0, col=grey(0.5))
   lines(CA.age,CA.thresh, col=2)
   
-  points(CA.age[peak.ind.notpass]+CA.res/2, rep(0.9*y.lim[2], length(peak.ind.notpass)), col="gray", pch=16, cex=0.5)
+  points(CA.age[peak.ind.notpass]+CA.res/2, rep(0.9*y.lim[2], length(peak.ind.notpass)), col="gray", pch=16, cex=1)
   points(CA.age[peak.ind.screened]+CA.res/2, rep(0.9*y.lim[2], length(peak.ind.screened)), col=2, pch=3, lwd=2)
   
   
@@ -326,7 +320,7 @@ if(breakage) {
   lines(Smpl$Age_calBP, Smpl$SmplCount, type='s', col=grey(0.5))
   abline(h=0, col=grey(0.5))
   
-  points(CA.age[peak.ind.notpass]+CA.res/2, rep(0.9*y.lim[2], length(peak.ind.notpass)), col="gray", pch=16, cex=0.5)
+  points(CA.age[peak.ind.notpass]+CA.res/2, rep(0.9*y.lim[2], length(peak.ind.notpass)), col="gray", pch=16, cex=1)
   points(CA.age[peak.ind.screened]+CA.res/2, rep(0.9*y.lim[2], length(peak.ind.screened)), col=2, pch=3, lwd=2)
   
   y.lim = c(min(CC.cpeak)+0.01, 1.2*max(CC.cpeak))
@@ -337,7 +331,7 @@ if(breakage) {
   lines(CC.age,CC.thresh, col=2)
   
   ind = which(CC.dat[,20]==1)
-  points(CC.age[ind], rep(0.7*y.lim[2], length(ind)), col="gray", pch=16, cex=0.7)
+  points(CC.age[ind], rep(0.7*y.lim[2], length(ind)), col="gray", pch=16, cex=1)
   ind = which(CC.dat[,19]==1)
   points(CC.age[ind], rep(0.7*y.lim[2], length(ind)), col="red", pch=3, lwd=2)
   
@@ -360,7 +354,7 @@ if(breakage) {
   lines(CA.age,CA.thresh, col=2)
   
   points(CA.age[peak.ind.screened]+CA.res/2, rep(0.9*y.lim[2], length(peak.ind.screened)), col=2, pch=3, lwd=2)
-  points(CA.age[peak.ind.notpass]+CA.res/2, rep(0.9*y.lim[2], length(peak.ind.notpass)), col="gray", pch=16, cex=0.5)
+  points(CA.age[peak.ind.notpass]+CA.res/2, rep(0.9*y.lim[2], length(peak.ind.notpass)), col="gray", pch=16, cex=1)
   
   
   y.lim = c(min(Smpl$SmplCount), 1.2*max(Smpl$SmplCount))
@@ -376,7 +370,7 @@ if(breakage) {
   abline(h=0, col=grey(0.5))
   
   points(CA.age[peak.ind.screened]+CA.res/2, rep(0.9*y.lim[2], length(peak.ind.screened)), col=2, pch=3, lwd=2)
-  points(CA.age[peak.ind.notpass]+CA.res/2, rep(0.9*y.lim[2], length(peak.ind.notpass)), col="gray", pch=16, cex=0.5)
+  points(CA.age[peak.ind.notpass]+CA.res/2, rep(0.9*y.lim[2], length(peak.ind.notpass)), col="gray", pch=16, cex=1)
   
   
   Smpl$frag = Smpl$SmplCount/Smpl$SmplArea
@@ -389,7 +383,7 @@ if(breakage) {
     polygon(c(underthresh.interval[i,],rev(underthresh.interval[i,])),
             rep(y.lim, each=2), col="lightcyan", border=NA) }
   
-  points(Smpl$Age_calBP, Smpl$frag, xlim=rev(range(CA.age)), pch=16, cex=0.7)
+  points(Smpl$Age_calBP, Smpl$frag, xlim=rev(range(CA.age)), pch=16, cex=1)
   abline(h=0, col=grey(0.5))
   
   
@@ -401,7 +395,7 @@ if(breakage) {
   lines(CC.age,CC.thresh, col=2)
   
   ind = which(CC.dat[,20]==1)
-  points(CC.age[ind], rep(0.7*y.lim[2], length(ind)), col="gray", pch=16, cex=0.7)
+  points(CC.age[ind], rep(0.7*y.lim[2], length(ind)), col="gray", pch=16, cex=1)
   ind = which(CC.dat[,19]==1)
   points(CC.age[ind], rep(0.7*y.lim[2], length(ind)), col="red", pch=3, lwd=2)
   
@@ -411,7 +405,7 @@ dev.off()
 
 
 # Plots comparison between fire events #####
-pdf(file.path(output.dir, "4_Comparison fire events_Perc.pdf"))
+pdf(file.path(output.dir, "4_Comparison fire events.pdf"))
 par(mfrow=c(1,1))
   y.lim = c(min(CA.cpeak), 1.7*max(CA.cpeak))
   plot(0,0, type='n', xlim=rev(range(CA.age)), ylim=y.lim, ylab=expression(CHAR[A]*~mm^{2}), xlab="Age cal BP")
@@ -444,12 +438,7 @@ FRI.CA$FRI <- c(diff(FRI.CA[,2]), NA)
 FRI.CAs = CA.dat[CA.dat.out[,19]==1,1:2]
 FRI.CAs$FRI <- c(diff(FRI.CAs[,2]), NA)
 
-
-
-FRI.CC = CC.dat[CCno.dat[,19]==1,1:2]
-  # This does the same thing but doesn't require an extra input file
-  FRI.CC = CC.dat[ (CC.dat[,19]==1 | CC.dat[,20]==1), 1:2]
-
+FRI.CC = CC.dat[ (CC.dat[,19]==1 | CC.dat[,20]==1), 1:2]
 FRI.CC$FRI = c(diff(FRI.CC[,2]), NA)
 
 FRI.CCs = CC.dat[CC.dat[,19]==1,1:2]
@@ -486,7 +475,7 @@ dev.off()
 
 # Boxplot of charcoal-particle areas of samples that passed the screening test 
 with (valSdl.perc, {
-  pdf(file.path(output.dir, "6_Boxplots_Screened_Samples_Perc.pdf"))
+  pdf(file.path(output.dir, "6_Boxplots_Screened_Samples.pdf"))
   par(mai = c(1,1,0.5,0.5), cex.axis = 1.2, cex.lab = 1.3)
   boxplot(SdlArea ~ Age_calBP, varwidth = TRUE, notch = FALSE, xlab = "Age (cal yrs BP)", ylab = expression(paste("Char.-particle area mm"^"2")))
   dev.off()
