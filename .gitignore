@@ -1,3 +1,11 @@
-arco_output/
-
+- Added arco_output/
+- 
 RK_test_script.r
+
+
+12/06:
+- Reduced number of CharAnalysis output files: now only two CharAnalysis output files needed
+  (one from analysis of charcoal areas (FireA) AND one from analysis of charcoal counts and with minimum count test (FireC)):
+- Deleted FireCsp.file from code, AND renamed to FireC.file;
+- Simplified calculation of FRIs with data from FireC;
+- In 'Diagnostic plot' grey dots (potentially insignificant peaks) are now larger;
