@@ -3,7 +3,7 @@
 #  episodes with the CharAnalysis software, as described in Finsinger et al. (2014).     #
 #                                                                                        #
 #  For additional details, please refer to Finsinger et al. (2014), or contact:          #
-#    Walter Finsinger <walter.finsinger@umontpellier.fr> or                              #
+#    Walter Finsinger <walter.finsinger@umontpellier.fr> or else                         #
 #    Ryan Kelly <rkelly@life.illinois.edu>.                                              #
 #                                                                                        #
 #----------------------------------------------------------------------------------------#
