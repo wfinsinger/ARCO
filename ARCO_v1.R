@@ -34,8 +34,7 @@
 #                       columns and as many rows as the number of observations:          #
 #                                                                                        #
 #         Column 1: Depth     = Depth of samples                                         #
-#         Column 2: SdlCounts = Number of charcoal particles in each sample              #
-#         Column 3: SdlArea   = Charcoal-particle areas                                  #
+#         Column 2: SdlArea   = Charcoal-particle areas                                  #
 #                                                                                        #
 #     2. Smpl.file    = .csv table with charcoal counts and charcoal areas. Should have  #
 #                       four columns and as many rows as the number of samples:          #
@@ -113,6 +112,25 @@ arco = function(Seedle.file, Smpl.file, FireA.file, FireC.file,
       return( quantile(rj.sum, probs=thresh.prob) )
   }
 
+# ------- Add Seedle counts to Seedle data.frame
+  if (min(Seedle$SdlArea) == 0) {      # thus if Seedle file contains zeros 
+    S <- Seedle[which(Seedle$SdlArea > 0), ]
+  } else {
+    S <- Seedle
+  }
+  
+  SdlCounts <- count(S, vars="Depth")
+  
+  Seedle2 <- merge(Seedle, SdlCounts, by="Depth", all.x=T)
+  colnames(Seedle2) [3] <- "SdlCounts" 
+  Seedle2$SdlCounts[is.na(Seedle2$SdlCounts)] <- 0
+  Seedle2 <- Seedle2[ ,c(1,3,2)]
+  
+  Seedle <- Seedle2
+  
+  rm(S, SdlCounts, Seedle2)
+  
+  
 # ------- Add ages to each Seedle (used later for local bootstrapping)
   Age <- Smpl[ ,-c(3,4)]
   Seedle <- merge(Seedle, Age, by.x = "Depth", all.y = FALSE)
