@@ -1,9 +1,9 @@
 #----------------------------------------------------------------------------------------#
 #  Screens charcoal peaks for charcoal-area records used to reconstruct past fire        #
-#  episodes with the CharAnalysis softwar, as described in Finsinger et al. (2014).      #
+#  episodes with the CharAnalysis software, as described in Finsinger et al. (2014).     #
 #                                                                                        #
 #  For additional details, please refer to Finsinger et al. (2014), or contact:          #
-#    Walter Finsinger <walter.finsinger@univ-montp2.fr> or                               #
+#    Walter Finsinger <walter.finsinger@umontpellier.fr> or                              #
 #    Ryan Kelly <rkelly@life.illinois.edu>.                                              #
 #                                                                                        #
 #----------------------------------------------------------------------------------------#
