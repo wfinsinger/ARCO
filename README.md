@@ -27,11 +27,10 @@ The input datasets should be .csv files.
 For each .csv, provide the full path to the file as the corresponding function argument. Details of the four files are below, and examples are included with this R code: 
  
 A) RAW DATA
-1. Seedle.csv = .csv table with charcoal-particle areas. Should have three columns and as many rows as the number of observations: 
+1. Seedle.csv = .csv table with charcoal-particle areas. Should have two columns and as many rows as the number of observations: 
  
 Column 1: Depth = Depth of samples 
-Column 2: SdlCounts = Number of charcoal particles in each sample 
-Column 3: SdlArea = Charcoal-particle areas 
+Column 2: SdlArea = Charcoal-particle areas 
  
 2. Smpl.csv = .csv table with charcoal counts and charcoal areas. Should have four columns and as many rows as the number of samples: 
  
@@ -43,7 +42,7 @@ Column 4: SmplArea = Cumulative charcoal area in each sample
 B) FIRE-EPISODE RECONSTRUCTIONS. 
 These are output files from the CharAnalysis program (Higuera et al. 2009), which is freely available (http://sites.google.com/site/charanalysis/). 
  
-3. FireA.csv = CharAnalysis output table from analysis of CHARCOAL AREAS 
+3. FireA.csv = CharAnalysis output table from analysis of CHARCOAL AREAS (WITHOUT minimum count test, i.e. with CharAnalysis parameter 'minCountP' = 1.0)
 4. FireC.csv = CharAnalysis output table from analysis of CHARCOAL COUNTS and WITH minimum count test, i.e. with CharAnalysis parameter 'minCountP' < 1.0 (e.g. 0.05 as in Higuera et al. [2009])
  
 *** Note: CharAnalysis files must have columns in the expected order, specifically: 
