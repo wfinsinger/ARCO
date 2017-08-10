@@ -8,5 +8,5 @@ setwd("/Users/wfinsing/Documents/GitHub/ARCO")
 source("ARCO_v1.r")
 
 # This command will let you run the ARCO_v1.r script using the example *.csv files
-arco(Seedle.file="Seedle.csv", Smpl.file="Smpl.csv",
+arco(Seedle.file="Seedle_v2.csv", Smpl.file="Smpl.csv",
      FireA.file="FireA.csv", FireC.file="FireC.csv")
