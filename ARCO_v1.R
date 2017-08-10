@@ -99,10 +99,12 @@ arco = function(Seedle.file, Smpl.file, FireA.file, FireC.file,
 
 # ----- LOAD files with Fire history derived from CharAnalysis
   # CharAnalysis output, with Charcoal areas
-    CA.dat <- read.csv(FireA.file, header=T, sep = ",") 
+    CA.dat <- read.csv(FireA.file, header=T, sep = ",", na.strings="#N/A")
+    CA.dat <- CA.dat[complete.cases(CA.dat[ ,1]), ]
 
   # CharAnalysis output, with Charcoal counts WITH pMinCount
-    CC.dat <- read.csv(FireC.file, header=T, sep = ",") 
+    CC.dat <- read.csv(FireC.file, header=T, sep = ",", na.strings="#N/A")
+    CC.dat <- CC.dat[complete.cases(CC.dat[ ,1]), ]
   
 # ----- Define minimum-area bootstrapping function 
   b.stat <- function(seedle.areas, sample.size, n.boot, thresh.prob) { 
