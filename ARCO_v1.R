@@ -85,6 +85,7 @@ arco = function(Seedle.file, Smpl.file, FireA.file, FireC.file,
   require(MASS)
   require(car)
   require(stats)
+  require(plyr)
   
 # ----- Create output directory
   dir.create(output.dir)
