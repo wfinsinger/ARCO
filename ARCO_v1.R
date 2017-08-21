@@ -395,6 +395,7 @@ if(breakage) {
   
   
   Smpl$frag = Smpl$SmplCount/Smpl$SmplArea
+  is.na(Smpl) <- sapply(Smpl, is.infinite)
   y.lim = c(0, 1.2*max(Smpl$frag, na.rm=TRUE))
   plot(0,0, type='n', xlim=rev(range(CA.age)), ylim=y.lim, ylab=expression(C["#"]/C[A]-ratio), xaxt="n", cex=1)
   for(i in 1:nrow(overthresh.interval)) {
