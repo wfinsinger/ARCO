@@ -292,7 +292,7 @@ plot(Seedle$SdlCounts, Seedle$SdlArea, ylab = expression(Particle~area~mm^{2}), 
 plot(Smpl$SmplCount, Smpl$SmplArea, ylab = expression(Charcoal~area~(C[A]~(mm^{2}))), pch = 20, xlim=(range(Smpl$SmplCount)), xaxt = "n")
 abline(lm(Smpl$SmplArea ~ Smpl$SmplCount))
 plot(Smpl$SmplCount, Smpl$SmplCount/Smpl$SmplArea, ylab = expression(C["#"]/C[A]-ratio), pch = 20, xlim=(range(Smpl$SmplCount)))
-mtext(expression(Charcoal~counts~(C["#"]~(pieces~sample-1))), side = 1, outer = TRUE, line = 2.5)
+mtext(expression(Charcoal~counts~(C["#"]~(pieces~sample^{-1}))), side = 1, outer = TRUE, line = 2.5)
 dev.off()
 
 
@@ -337,7 +337,7 @@ if(breakage) {
   
   
   y.lim = c(min(Smpl$SmplCount), 1.2*max(Smpl$SmplCount))
-  plot(0,0, type='n', xlim=rev(range(CA.age)), ylim=y.lim, ylab=paste("Charcoal counts \n (pieces sample-1)"), xaxt="n", cex=1)
+  plot(0,0, type='n', xlim=rev(range(CA.age)), ylim=y.lim, ylab=expression(Char.~counts~(pieces*~sample^{"-1"})), xaxt="n", cex=1)
   for(i in 1:nrow(overthresh.interval)) {
     polygon(c(overthresh.interval[i,],rev(overthresh.interval[i,])),
             rep(y.lim, each=2), col="mistyrose", border=NA) }
@@ -386,7 +386,7 @@ if(breakage) {
   
   
   y.lim = c(min(Smpl$SmplCount), 1.2*max(Smpl$SmplCount))
-  plot(0,0, type='n', xlim=rev(range(CA.age)), ylim=y.lim, ylab=paste("Charcoal counts \n (pieces sample-1)"), xaxt="n", cex=1)
+  plot(0,0, type='n', xlim=rev(range(CA.age)), ylim=y.lim, ylab=expression(Char.~counts~(pieces*~sample^{"-1"})), xaxt="n", cex=1)
   for(i in 1:nrow(overthresh.interval)) {
     polygon(c(overthresh.interval[i,],rev(overthresh.interval[i,])),
             rep(y.lim, each=2), col="mistyrose", border=NA) }
