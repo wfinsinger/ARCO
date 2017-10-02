@@ -18,8 +18,9 @@
 #   win.width   = temporal span of the window from which bootstrap samples are           #
 #                 generated. For each peak to be screened, particles are randomly drawn  #
 #                 (with replacement) from all samples within a focal window, which is    #
-#                 centered on the peak and has a full span of win.width (default = 1000).#
+#                 centered on the peak and has a full span of win.width (default = 1000) #
 #   breakage    = if FALSE plots also C#/CA-ratios in diagnostic plot (default = FALSE)  #
+#   ff_sm_yr    = Window to smooth peak frequencies over, in years (default = 1000)      #
 #   output.dir  = path for output data and figures                                       #
 #                   (default = 'arco_output' in current working directory)               #
 #                                                                                        #
@@ -75,7 +76,7 @@
 #----------------------------------------------------------------------------------------#
   
 arco = function(Seedle.file, Smpl.file, FireA.file, FireC.file, 
-                n.boot=10000, thresh.prob=0.95, win.width=1000, breakage=FALSE,
+                n.boot=10000, thresh.prob=0.95, win.width=1000, breakage=FALSE, ff_sm_yr=1000,
                 output.dir=file.path(".","arco_output"))
 {
 
@@ -275,6 +276,60 @@ arco = function(Seedle.file, Smpl.file, FireA.file, FireC.file,
       CA.dat.out[-peak.ind.screened,19] = 0                   # Remove screened peaks from "peaks Final"
       CA.dat.out[setdiff(peak.ind,peak.ind.screened),20] = 1  # Add them to "peaks Insig."
 
+      
+    # peakFrequ. Peak analysis summary includes a smoothed fire-frequency curve.
+    # The smoothing window for the analysis is entered in the parameter peakFrequ (in years). By default, PeakFrequ=1000
+    # Thus, the total number of fires within a 1000-yr period are summed, and then this series is smoothed with a Lowess smoother.
+    # Largely built on Matlab source code (CharPeakAnalysisResults_conPDF.m) that was written by Phil Higuera 7 May 2014
+    # see https://github.com/phiguera/CharAnalysis/blob/master/CharAnalysis_1_1_MATLAB/CharPeakAnalysisResults_conPDF.m
+    
+    # First set full window width over which number of fires are summed, thus defining dimension as (# fires/1000 years)
+    peakFrequ <- 1000 # [yr]
+    
+    CA.peaks <- CA.dat.out[ ,19]
+    
+    ff_sum_yr <- peakFrequ # [yr] Window to sum peaks over.
+    half.win <- ff_sum_yr/2          # [yr] # [datapoints] Window corresponding to smoothing-window half width
+    n.row.halfwin <- half.win/CA.res # [datapoints] Window corresponding to ff_sum_yr half width
+    
+    
+    ff_sm_span.points <- round(ff_sm_yr/CA.res) # [datapoints] Window to smooth peak frequencies over
+    ff_sm_span.prop <- ff_sm_span.points/length(CA.age) # [proportion] span of lowess/loess to smooth peak frequencies over
+    
+    # Make space in empty matrix
+    Charcoal.peaksFrequ <- matrix(data=NA, nrow=length(CA.age), ncol=1)
+    
+    # Get the total number of fires within a 1000-yr period and calculate their frequencies (as # fires / 1000 years)
+    for (i in 1:length(CA.age)) {
+      if (i < n.row.halfwin) { # If start of record
+        Charcoal.peaksFrequ [i] <- sum(CA.peaks[1:n.row.halfwin+i]) *
+          round(ff_sum_yr/CA.res) / floor((ff_sum_yr/CA.res)/2+i)
+        # Charcoal.peaksFrequ [i] <- sum(CA.peaks[1:n.row.halfwin+i]) * (round(half.win) / floor(n.row.halfwin+i))
+      }
+      
+      if (i > (length(CA.age) - n.row.halfwin))   {  # If end of record
+        start.bound <- ceiling(i-n.row.halfwin)  # defines where it should start counting Charcoal Peaks
+        Charcoal.peaksFrequ [i] <- sum(CA.peaks[start.bound:length(CA.age)]) /
+          ((length(CA.peaks) - start.bound) * CA.res)
+      }
+      
+      if (i >= n.row.halfwin && i <= (length(CA.age)-n.row.halfwin)) {  # Else, it's the middle of the record.
+        Charcoal.peaksFrequ [i] <- sum(CA.peaks[(ceiling(i-n.row.halfwin)):(ceiling(i+n.row.halfwin)) ]) /
+          (2*n.row.halfwin * (CA.res))
+      }
+    }
+    
+    # Add CA.age
+    Charcoal.peaksFrequ <- as.data.frame(cbind(CA.age, Charcoal.peaksFrequ))
+    colnames(Charcoal.peaksFrequ) [2] <- "CA.ff"
+      
+    # Loess
+    ff_sm_loess <- loess(formula=CA.ff~CA.age, data=Charcoal.peaksFrequ, span=ff_sm_span.prop, degree=1)
+    ff_loess.pred <- predict(ff_sm_loess, newdata=Charcoal.peaksFrequ$CA.age, se=F)
+      
+    # Write loess-predicted values into the CA.dat.out data.frame
+    CA.dat.out <- cbind(CA.dat.out[ ,1:21], ff_loess.pred, CA.dat.out[ ,23:33])
+      
   # Add column names and write to disk
     CA.colnames = c("cm Top_i (cm)","age Top_i_(yr BP)","char Count_i (#)","char Vol_i (cm3)",
                     "char Con_i (# cm-3)","char Acc_i (# cm-2 yr-1)","charBkg (# cm-2 yr-1)","char Peak (# cm-2 yr-1)",
