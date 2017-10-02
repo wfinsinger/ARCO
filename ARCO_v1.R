@@ -320,7 +320,7 @@ arco = function(Seedle.file, Smpl.file, FireA.file, FireC.file,
     }
     
     # Add CA.age
-    Charcoal.peaksFrequ <- as.data.frame(cbind(CA.age, Charcoal.peaksFrequ))
+    Charcoal.peaksFrequ <- as.data.frame(cbind(CA.age, Charcoal.peaksFrequ*1000))
     colnames(Charcoal.peaksFrequ) [2] <- "CA.ff"
       
     # Loess
