@@ -302,8 +302,8 @@ arco = function(Seedle.file, Smpl.file, FireA.file, FireC.file,
     # Get the total number of fires within a 1000-yr period and calculate their frequencies (as # fires / 1000 years)
     for (i in 1:length(CA.age)) {
       if (i < n.row.halfwin) { # If start of record
-        Charcoal.peaksFrequ [i] <- sum(CA.peaks[1:n.row.halfwin+i]) *
-          round(ff_sum_yr/CA.res) / floor((ff_sum_yr/CA.res)/2+i)
+        Charcoal.peaksFrequ [i] <- sum(CA.peaks[1:(n.row.halfwin+i)]) *
+          (round(ff_sum_yr/CA.res) / floor((ff_sum_yr/CA.res)/2+i))
         # Charcoal.peaksFrequ [i] <- sum(CA.peaks[1:n.row.halfwin+i]) * (round(half.win) / floor(n.row.halfwin+i))
       }
       
