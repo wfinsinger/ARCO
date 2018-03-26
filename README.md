@@ -39,9 +39,12 @@ Column 2: SdlArea = Charcoal-particle areas
  
 2. Smpl.csv = .csv table with charcoal counts and charcoal areas. Should have four columns and as many rows as the number of samples: 
  
-Column 1: Depth = Depth of samples 
+Column 1: Depth = Depth of samples
+
 Column 2: Age_calBP = Age estimate of samples 
+
 Column 3: SmplCount = Number of charcoal particles in each sample 
+
 Column 4: SmplArea = Cumulative charcoal area in each sample 
  
 B) FIRE-EPISODE RECONSTRUCTIONS. 
@@ -53,8 +56,11 @@ These are output files from the CharAnalysis program (Higuera et al. 2009), whic
 *** Note: CharAnalysis files must have columns in the expected order, specifically: 
  
 Column 2: "age Top_i", the age at the top of the interpolated sample 
+
 Column 8: "char Peak", the Cpeak component of CHAR 
+
 Column 12: "thresh FinalPos", the threshold used for peak identification 
+
 Column 19: "peaks Final", the boolean series representing identified peaks 
  
 ----------------------------------------------------------------------------------------
