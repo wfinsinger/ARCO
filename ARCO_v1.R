@@ -284,16 +284,16 @@ arco = function(Seedle.file, Smpl.file, FireA.file, FireC.file,
     # see https://github.com/phiguera/CharAnalysis/blob/master/CharAnalysis_1_1_MATLAB/CharPeakAnalysisResults_conPDF.m
     
     # First set full window width over which number of fires are summed, thus defining dimension as (# fires/1000 years)
-    peakFrequ <- 1000 # [yr]
+    peakFrequ <- ff_sm_yr # [yr]
     
     CA.peaks <- CA.dat.out[ ,19]
     
-    ff_sum_yr <- peakFrequ # [yr] Window to sum peaks over.
+    ff_sum_yr <- peakFrequ           # [yr] Window to sum peaks over.
     half.win <- ff_sum_yr/2          # [yr] # [datapoints] Window corresponding to smoothing-window half width
     n.row.halfwin <- half.win/CA.res # [datapoints] Window corresponding to ff_sum_yr half width
     
     
-    ff_sm_span.points <- round(ff_sm_yr/CA.res) # [datapoints] Window to smooth peak frequencies over
+    ff_sm_span.points <- round(peakFrequ/CA.res) # [datapoints] Window to smooth peak frequencies over
     ff_sm_span.prop <- ff_sm_span.points/length(CA.age) # [proportion] span of lowess/loess to smooth peak frequencies over
     
     # Make space in empty matrix
