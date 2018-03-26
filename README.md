@@ -48,7 +48,7 @@ Column 3: SmplCount = Number of charcoal particles in each sample
 Column 4: SmplArea = Cumulative charcoal area in each sample 
  
 B) FIRE-EPISODE RECONSTRUCTIONS. 
-These are output files from the CharAnalysis program (Higuera et al. 2009), which is freely available (http://sites.google.com/site/charanalysis/). 
+These are output files from the CharAnalysis program (Higuera et al. 2009), which is freely available (http://phiguera.github.io/CharAnalysis/). 
  
 3. FireA.csv = CharAnalysis output table from analysis of CHARCOAL AREAS (WITHOUT minimum count test, i.e. with CharAnalysis parameter 'minCountP' = 1.0)
 4. FireC.csv = CharAnalysis output table from analysis of CHARCOAL COUNTS and WITH minimum count test, i.e. with CharAnalysis parameter 'minCountP' < 1.0 (e.g. 0.05 as in Higuera et al. [2009])
