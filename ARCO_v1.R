@@ -279,8 +279,6 @@ arco = function(Seedle.file, Smpl.file, FireA.file, FireC.file,
       CA.dat.out[-peak.ind.screened, 19] <- 0                   # Remove screened peaks from "peaks Final"
       CA.dat.out[setdiff(peak.ind,peak.ind.screened), 20] <- 1  # Add them to "peaks Insig."
       
-      CA.dat.out[setdiff(peak.ind,peak.ind.screened), 21] <- 0  # Set peak Mag=0 if peaks Insig=1
-      
     # Then recalculate peak frequency based on the new screened CA peaks:   
     # peakFrequ. Peak analysis summary includes a smoothed fire-frequency curve.
     # The smoothing window for the analysis is entered in the parameter peakFrequ (in years). By default, PeakFrequ=1000
