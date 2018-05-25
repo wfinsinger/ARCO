@@ -257,7 +257,8 @@ arco = function(Seedle.file, Smpl.file, FireA.file, FireC.file,
       }
     }
 
-  # If at least one of the original samples contributing to a CharAnalysis peak is beyond its bootstrapped threshold, then that CharAnalysis peak passed the screening. 
+  # If at least one of the original samples contributing to a CharAnalysis peak
+    # is beyond its bootstrapped threshold, then that CharAnalysis peak passed the screening. 
     peak.ind.screened = peak.ind[which(screen.pass>0)]
     peak.ind.notpass = peak.ind[which(screen.pass<1)]
 
@@ -271,12 +272,16 @@ arco = function(Seedle.file, Smpl.file, FireA.file, FireC.file,
     write.csv(comp.perc, file.path(output.dir, "comp_perc.csv"), row.names = FALSE)
     
    
-  # New CharAnalysis output file that reflects peak-area screening
-    CA.dat.out = CA.dat                                       # Start with the original CA data
-      CA.dat.out[-peak.ind.screened,19] = 0                   # Remove screened peaks from "peaks Final"
-      CA.dat.out[setdiff(peak.ind,peak.ind.screened),20] = 1  # Add them to "peaks Insig."
-
+  ### New CharAnalysis output file that reflects peak-area screening ###
+    
+    # First change "peaks Final", "peaks Insig.", and "peak Mag"
+    CA.dat.out <- CA.dat                                       # Start with the original CA data
+      CA.dat.out[-peak.ind.screened, 19] <- 0                   # Remove screened peaks from "peaks Final"
+      CA.dat.out[setdiff(peak.ind,peak.ind.screened), 20] <- 1  # Add them to "peaks Insig."
       
+      CA.dat.out[setdiff(peak.ind,peak.ind.screened), 21] <- 0  # Set peak Mag=0 if peaks Insig=1
+      
+    # Then recalculate peak frequency based on the new screened CA peaks:   
     # peakFrequ. Peak analysis summary includes a smoothed fire-frequency curve.
     # The smoothing window for the analysis is entered in the parameter peakFrequ (in years). By default, PeakFrequ=1000
     # Thus, the total number of fires within a 1000-yr period are summed, and then this series is smoothed with a Lowess smoother.
