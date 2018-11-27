@@ -173,14 +173,7 @@ arco = function(Seedle.file, Smpl.file, FireA.file, FireC.file,
         # to the peak
         if(peak.ind[1] == 1) {
           overthresh.ind[[1]] = peak.ind[1]
-        } else if (peak.ind[1] == 2) {
-          # Look for another sample belonging to this peak
-          ind.cur = peak.ind[i]-1                         # start with the next sample above...
-          while(CA.cpeak[ind.cur]>CA.thresh[ind.cur]) {   # if it's also above the threshold...
-            overthresh.ind[[i]] = c(overthresh.ind[[i]], ind.cur)  # add it to 'overthresh.ind'...
-          }
-        }
-        } else {
+        }  else {
       # Else Look for other samples belonging to this peak
         ind.cur = peak.ind[i]-1                         # start with the next sample above...
         while(CA.cpeak[ind.cur]>CA.thresh[ind.cur]) {   # if it's also above the threshold...
@@ -189,6 +182,14 @@ arco = function(Seedle.file, Smpl.file, FireA.file, FireC.file,
         }
         }
   
+        # if (peak.ind[1] == 2) {
+        #   # Look for another sample belonging to this peak
+        #   ind.cur = peak.ind[i]-1                         # start with the next sample above...
+        #   while(CA.cpeak[ind.cur]>CA.thresh[ind.cur]) {   # if it's also above the threshold...
+        #     overthresh.ind[[i]] = c(overthresh.ind[[i]], ind.cur)  # add it to 'overthresh.ind'...
+        #   }
+        
+        
       # For each peak, find the full age interval spanned by all samples exceeding the threshold.
         overthresh.interval[i,] = c( min(CA.age[overthresh.ind[[i]]]),
                                      max(CA.age[overthresh.ind[[i]]])+CA.res ) 
