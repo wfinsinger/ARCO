@@ -9,3 +9,4 @@ RK_test_script.r
 - Deleted FireCsp.file from code, AND renamed to FireC.file;
 - Simplified calculation of FRIs with data from FireC;
 - In 'Diagnostic plot' grey dots (potentially insignificant peaks) are now larger;
+.Rproj.user
