@@ -169,17 +169,24 @@ arco = function(Seedle.file, Smpl.file, FireA.file, FireC.file,
       # Start with the sample identified as the peak
         overthresh.ind[[i]] = peak.ind[i]
       
-      # If the first peak is in the first sample, don't look for other samples belonging
+        # If the first peak is in the first sample, don't look for other samples belonging
         # to the peak
-        if(peak.ind[1] == 1) {
+        if(peak.ind[i] == 1) {
           overthresh.ind[[1]] = peak.ind[1]
-        } else {
-      # Else Look for other samples belonging to this peak
-        ind.cur = peak.ind[i]-1                         # start with the next sample above...
-        while(CA.cpeak[ind.cur]>CA.thresh[ind.cur]) {   # if it's also above the threshold...
-          overthresh.ind[[i]] = c(overthresh.ind[[i]], ind.cur)  # add it to 'overthresh.ind'...
-          ind.cur = ind.cur-1                           # and get ready to check the next sample above.
+        } 
+        if(peak.ind[i] == 2) {
+          ind.cur = peak.ind[i]-1                         # start with the next sample above...
+          while(CA.cpeak[ind.cur]>CA.thresh[ind.cur]) {   # if it's also above the threshold...
+            overthresh.ind[[i]] = c(overthresh.ind[[i]], ind.cur)  # add it to 'overthresh.ind'...
+          } 
         }
+        if(peak.ind[i] > 2) {
+          # Else Look for other samples belonging to this peak
+          ind.cur = peak.ind[i]-1                         # start with the next sample above...
+          while(CA.cpeak[ind.cur]>CA.thresh[ind.cur]) {   # if it's also above the threshold...
+            overthresh.ind[[i]] = c(overthresh.ind[[i]], ind.cur)  # add it to 'overthresh.ind'...
+            ind.cur = ind.cur-1                           # and get ready to check the next sample above.
+          }
         }
         
         
