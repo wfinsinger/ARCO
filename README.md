@@ -32,12 +32,12 @@ The input datasets should be .csv files.
 For each .csv, provide the full path to the file as the corresponding function argument. Details of the four files are below, and examples are included with this R code: 
  
 A) RAW DATA
-1. Seedle.csv = .csv table with charcoal-particle areas. Should have two columns and as many rows as the number of observations: 
+1. Seedle.csv = .csv table with charcoal-particle areas. Should have two columns and as many rows as the number of observations (i.e. charcoal particles; see the example file 'Seedle_2.csv'): 
  
 Column 1: Depth = Depth of samples 
 Column 2: SdlArea = Charcoal-particle areas 
  
-2. Smpl.csv = .csv table with charcoal counts and charcoal areas. Should have four columns and as many rows as the number of samples: 
+2. Smpl.csv = .csv table with charcoal counts and charcoal areas. Should have four columns and as many rows as the number of samples (see the example file 'Smpl.csv'): 
  
 Column 1: Depth = Depth of samples
 
@@ -68,6 +68,9 @@ Column 19: "peaks Final", the boolean series representing identified peaks
 References: 
 -
 Finsinger, W., R. Kelly, J. Fevre, and E.K. Magyari. 2014. A guide to screening charcoal peaks in macrocharcoal-area records for fire episode reconstructions. The Holocene XX: XXXX. doi: 10.1177/0959683614534737 (http://dx.doi.org/10.1177/0959683614534737)
+
+Kelly R, Higuera PE, Barrett CM, Hu FS (2011) A signal-to-noise index to quantify the potential for peak detection in sediment–charcoal records. Quaternary Research 75:11–17. doi: 10.1016/j.yqres.2010.07.011
+(http://dx.doi.org/10.1016/j.yqres.2010.07.011)
  
 Higuera, P.E., L.B. Brubaker, P.M. Anderson, F.S. Hu, and T.A. Brown. 2009. Vegetation mediated the impacts of postglacial climate change on fire regimes in the south-central Brooks Range, Alaska. Ecological Monographs 79:201–219. http://dx.doi.org/10.1890/07-2019.1)
  
