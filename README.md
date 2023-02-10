@@ -8,7 +8,10 @@ This R function screens charcoal peaks for charcoal-area records used to reconst
 For additional details, please refer to Finsinger et al. (2014), or contact: 
 Walter Finsinger <walter.finsinger@umontpellier.fr> or 
 Ryan Kelly <rkelly@life.illinois.edu>. 
- 
+
+NOTE: as of February 2023, this stand-alone arco() function has been included
+in the 'tapas' package. See https://github.com/wfinsinger/tapas for further
+details.
  
 The R function requires four data frames, as well as the following additional parameters: 
 ---
